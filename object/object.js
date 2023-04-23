@@ -1,3 +1,11 @@
+/*
+ * @Author: liu.xiaofan 17864297490@163.com
+ * @Date: 2023-04-22 15:52:37
+ * @LastEditors: liu.xiaofan 17864297490@163.com
+ * @LastEditTime: 2023-04-23 22:35:24
+ * @FilePath: \study\object\object.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 "use strict"
 
 let person = {
@@ -18,30 +26,47 @@ let person = {
  */
 
 // 通过Object.defineproperty()可以修改、添加对象属性
-
-// 修改name为不可枚举, object相关方法中则不会显示name
-Object.defineProperty(person, 'name', {
-    enumerable: false
-})
-// console.log(Object.entries(person));
-for (let key in person) {
-    // console.log(key)
-}
-
-// configurable修改为false
-Object.defineProperty(person, 'role', {
-    configurable: false
-})
-try {
-    delete person.role // 严格模式下抛出异常
-} catch (error) {
-    console.log(error);
-}
-try {
-    // configurable修改为false之后将不再可进行修改, 报异常
-    Object.defineProperty(person, 'role', {
-        configurable: true
+function enumerableChange() {
+    Object.defineProperty(person, 'name', {
+        enumerable: false
     })
-} catch (error) {
-    console.log(error);
+    console.log(Object.entries(person));
+    for (let key in person) {
+        console.log(key)
+    }
 }
+// enumerableChange()
+
+function configurableChange() {
+    // configurable修改为false
+    Object.defineProperty(person, 'role', {
+        configurable: false
+    })
+    try {
+        delete person.role // 严格模式下抛出异常
+    } catch (error) {
+        console.log(error);
+    }
+    try {
+        // configurable修改为false之后将不再可进行修改, 报异常
+        Object.defineProperty(person, 'role', {
+            configurable: true
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+// configurableChange()
+
+function writableChange() {
+    Object.defineProperty(person, 'age', {
+        writable: false
+    })
+
+    try {
+        person.age = 100 // 不可修改，报错
+    } catch (error) {
+        console.log(person.age)
+    }
+}
+writableChange()
