@@ -30,7 +30,7 @@ function enumerableChange() {
     Object.defineProperty(person, 'name', {
         enumerable: false
     })
-    console.log(Object.entries(person));
+    console.log(Object.entries(person))
     for (let key in person) {
         console.log(key)
     }
@@ -45,7 +45,7 @@ function configurableChange() {
     try {
         delete person.role // 严格模式下抛出异常
     } catch (error) {
-        console.log(error);
+        console.log(error)
     }
     try {
         // configurable修改为false之后将不再可进行修改, 报异常
@@ -53,7 +53,7 @@ function configurableChange() {
             configurable: true
         })
     } catch (error) {
-        console.log(error);
+        console.log(error)
     }
 }
 // configurableChange()
